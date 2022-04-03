@@ -5,7 +5,7 @@
 
 In this project we built a current meter using the AC712 current sensor, instead of just displaying or reporting current measurements we made the project a little more interesting by calculating power consumption (which is just POWER = CURRENT x VOLTAGE), and reporting the power consumption via email. To make this project even more interesting we allow the user to set a daily power consumption limit, if the power consumption of the device you are monitoring reaches 25% of the set limit, you will receive a notification, you will receive another notification at 50% and when the device has reached the set power usage threshold. If all is well and no limits are exceeded, you will still receive an email notification at the end of each day with the daily usage for that day.
 
-The AC712 sensors is capable of measuring both AC and DC current, and come in three models a 5A, 20A and 30A models. We are using the 30A model [XC4610](https://jaycar.com.au/p/XC4610), which means you can use this model to measure most current sources around the home including mains (240V AC). We do not recommend that you connect the unit to a mains outlet unless this work is carried out by a licensed electrician in accordance with the relevant Australian Electrical safety standards. You can safely connect the AC712 to low voltage sources and appliances such as 12V or 24V batteries, or low voltage AC devices.
+The AC712 sensors measures DC current, and comes in three models: 5A, 20A and 30A. We are using the 30A model [XC4610](https://jaycar.com.au/p/XC4610), which means you can use this model to measure most current sources in low voltage sources and appliances such as 12V/24V batteries, solar panels, portable fridges etc.
 
 ## Before you start:
 
@@ -32,7 +32,7 @@ This project is very easy to build, only three wires from the AC712 to the ESP82
 
 ![](images/diagram01.png)
 
-Because the AC712 and ESP8266 D1 Mini are so small you can fit this project in almost any small enclosure, but be sure to observe Electrical safety if using high voltage sources. Only two wires from the AC712 to be connected in series with the load current you are measuring as depicted in Figure 2 below.
+Because the AC712 and ESP8266 D1 Mini are so small you can fit this project in almost any small enclosure. Only two wires from the AC712 to be connected in series with the load current you are measuring as depicted in Figure 2 below.
 
 ![](images/diagram02.png)
 
@@ -74,16 +74,15 @@ Open the main source code file Power_Usage_Monitor.ino, you will need to review 
 #define daily_usage_limit 1000 // This is the daily usage limit
 ```
 
-* Now you need to specify the type of current measurement, whether you are measuring DC or AC current. Set the measurement_type variable to DC_curnt or AC_current, as illustrated below;
+* Now you need to specify the type of current measurement, whether you are measuring DC or AC current. Set the measurement_type variable to DC_current or AC_current, as illustrated below;
 
 ```c
-int measurment_type = DC_current; // change this to the type of current DC or AC
+int measurment_type = DC_current; // change this to the type of current - DC in this case
 ```
 
-* Now you need to specify the voltage level, in order to correctly calculate the power consumption. Depending on the type of current you are measuring set the Vdc or Vac parameter to the voltage source you are measuring, as shown below;
+* Now you need to specify the voltage level, in order to correctly calculate the power consumption. Depending on the type of current you are measuring set the Vdc parameter to the voltage source you are measuring, as shown below;
 
 ```c
-float Vac = 12; // Edit this value to match the voltage level in your application.
 float Vdc = 12; // Edit this value to match the voltage level in your application.
 ```
 
